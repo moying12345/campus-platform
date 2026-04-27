@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant User as 普通用户
+    participant Controller as Dish/OrderController
+    participant Service as OrderService
+    participant DB as MySQL
+    participant Redis as Redis缓存
+
+    User->>Controller: 浏览菜品列表
+    Controller->>Redis: 查询热点菜品缓存
+    alt 缓存命中
+        Redis-->>Controller: 返回菜品数据
+    else 缓存未命中
+        Controller->>DB: 查询菜品表
+        DB-->>Controller: 返回数据
+        Controller->>Redis: 写入缓存
+    end
+    Controller-->>User: 展示菜品
+    
+    User->>Controller: 提交订单 (createOrder)
+    Controller->>Service: 创建订单记录
+    Service->>DB: 插入 order 表
+    DB-->>Service: 返回订单ID
+    Service-->>Controller: 下单成功
+    Controller-->>User: 反馈结果

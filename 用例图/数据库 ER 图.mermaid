@@ -1,0 +1,27 @@
+erDiagram
+    USER ||--o{ ORDER : places
+    USER ||--o{ RESERVATION : books
+    USER ||--o{ ACTIVITY_APPLY_RECORD : applies
+    MERCHANT ||--o{ DISH : manages
+    MERCHANT ||--o{ MEAL_PACKAGE : creates
+    DISH_CATEGORY ||--o{ DISH : classifies
+    STUDY_ROOM ||--o{ SEAT : contains
+    SEAT ||--o{ RESERVATION : reserved_by
+    CAMPUS_ACTIVITY ||--o{ ACTIVITY_APPLY_RECORD : receives
+
+    USER {
+        bigint id PK
+        string username
+        string role
+    }
+    DISH {
+        bigint id PK
+        bigint merchant_id FK
+        decimal price
+    }
+    RESERVATION {
+        bigint id PK
+        bigint seat_id FK
+        date reserve_date
+        string time_slot
+    }

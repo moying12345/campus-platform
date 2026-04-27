@@ -1,0 +1,22 @@
+graph LR
+    Merchant((商家))
+    
+    Merchant --> W1[登录系统]
+    Merchant --> W2[菜品管理]
+    Merchant --> W3[套餐管理]
+    Merchant --> W4[订单处理]
+    Merchant --> W5[图片上传]
+    
+    W2 --- WA[添加菜品]
+    W2 --- WB[编辑菜品]
+    W2 --- WC[上架下架]
+    W2 --- WD[分类关联]
+    
+    W3 --- WE[创建套餐]
+    W3 --- WF[套餐菜品配置]
+    
+    W4 --- WG[查看订单]
+    W4 --- WH[处理订单]
+    
+    W5 --- WI[上传菜品图片]
+    W5 --- WJ[更新图片]

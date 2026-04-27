@@ -1,0 +1,11 @@
+flowchart TD
+    Start([开始预约]) --> Input[选择座位、日期、时段]
+    Input --> CheckRule{检查预约规则}
+    CheckRule -- 违规 --> Error1[提示：时长或取消规则不符]
+    CheckRule -- 合规 --> QueryDB[查询该座位当日已有预约]
+    QueryDB --> Loop{遍历已有预约}
+    Loop -- 存在时间重叠 --> Conflict[标记为冲突]
+    Loop -- 无重叠 --> Success[允许预约]
+    Conflict --> Error2[提示：该时段已被占用]
+    Success --> Save[保存预约记录 Reservation]
+    Save --> End([结束])
